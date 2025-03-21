@@ -1,0 +1,51 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#container {
+  width: 100vw;
+  height: 100vh;
+}
+
+
+.amap-indoormap-floorbar-control {
+  &.is-mobile .select-dock {
+    display: none;
+  }
+
+  &.is-mobile .floor-list-box {
+    height: unset !important;
+  }
+
+  .floor-list-box {
+    max-height: unset !important;
+  }
+
+}
+
+.floor-list {
+  margin: unset !important;
+
+  .floor-list-item.selected div {
+    background: #1890ff;
+    color: #fff !important;
+  }
+}
+
+
+#refsh {
+  position: fixed;
+  width: 100px;
+  height: 30px;
+  border-radius: 6px;
+  text-align: center;
+  line-height: 30px;
+  background: #ffffff;
+  bottom: 100px;
+  left: 50%;
+  margin-left: -50%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}

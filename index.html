@@ -6,39 +6,12 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <style>
-        html,
-        body,
-        #container {
-            width: 100vw;
-            height: 100vh;
-        }
-
-        .floor-list {
-            margin: unset !important;
-        }
-
-        .amap-indoormap-floorbar-control .floor-list-box {
-            max-height: unset !important;
-        }
-
-        .amap-indoormap-floorbar-control.is-mobile .floor-list-box {
-            height: unset !important;
-        }
-    </style>
+    <link rel="stylesheet" href="./index.css">
 </head>
 <body>
 <div id="container"></div>
 
-<div>
-    <button data-value="4">4楼</button>
-    <button data-value="3">3楼</button>
-    <button data-value="2">2楼</button>
-    <button data-value="1">1楼</button>
-    <button data-value="-1">负1楼</button>
-    <button data-value="-2">地下停车场</button>
-</div>
-
+<div id="refsh">刷新当前位置</div>
 <script>
   window._AMapSecurityConfig = {
     securityJsCode: "8ec0a13f9efd6705e00b339fa29453b2",
@@ -46,6 +19,7 @@
 
 </script>
 <script src="https://webapi.amap.com/loader.js"></script>
+<script src="./data.js"></script>
 <script src="./index.js"></script>
 <script type="text/javascript">
 
@@ -64,32 +38,8 @@
         center: [108.962636, 34.216242],
       });
       window.aaa = map;
-      /* 隐藏楼层控件*/
-      // map.indoorMap.hideFloorBar(true);
 
-      const path2 = [
-        [108.961888, 34.215844],
-        [108.96189, 34.215981],
-        [108.962502, 34.215988],
-        [108.962682, 34.216063],
-        [108.962692, 34.21625],
-        [108.962612, 34.216252],
-      ];
 
-      var path = [
-          [108.962304, 34.21599],
-          [108.962319, 34.216411],
-          [108.962769, 34.216441],
-          [108.962667, 34.21692],
-          [108.962308, 34.217132],
-          [108.961681, 34.217099],
-          [108.961557, 34.216475],
-          [108.961791, 34.216026],
-        ]
-      ;
-
-      // addLine({ AMap, map, path });
-      addLine({ AMap, map, path: path2 });
       AMap.plugin(['AMap.ControlBar'], function () {
         map.addControl(new AMap.ControlBar({
           position: {
@@ -98,27 +48,53 @@
           },
         }));
       });
+      document.querySelector('#refsh').addEventListener('click', async () => {
+        const coordinate = await getCurrentLocation();
+        const bbb = new AMap.Marker({
+          map: map,
+          icon: new AMap.Icon({
+            size: new AMap.Size(30, 30),
+            image: './dw.png',
+            imageSize: new AMap.Size(30, 30),
+          }),
+          showShadow: true,
+          position: [108.962612, 34.216252],
+        });
+
+        setTimeout(() => {
+          map.add(bbb);
+        }, 100);
+
+        bbb.setPosition(coordinate);
+        map.setCenter(coordinate);
+        renderLine({
+          map,
+          AMap,
+          coordinate,
+        });
+      });
 
       let att = [];
       map.on('click', (e) => {
-        let a = [e.lnglat.lng, e.lnglat.lat];
-        att.push(a);
+        // 拾取坐标
+        let coordinate = [e.lnglat.lng, e.lnglat.lat];
+        att.push(coordinate);
         console.log(att);
+        console.log(coordinate);
+        // 渲染
+        renderLine({
+          map,
+          AMap,
+          coordinate,
+        });
       });
+
 
     })
     .catch((e) => {
       console.error(e); //加载错误提示
     });
-  window.addEventListener('click', function (e) {
-    setTimeout(function () {
-      document.querySelector('.floor-list').childNodes.forEach(function (el) {
-        if (el.className.includes('selected')) {
-          console.log(el.innerText);
-        }
-      });
-    }, 1000);
-  });
+
 
 </script>
 </body>
