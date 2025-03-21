@@ -13,10 +13,31 @@
             width: 100vw;
             height: 100vh;
         }
+
+        .floor-list {
+            margin: unset !important;
+        }
+
+        .amap-indoormap-floorbar-control .floor-list-box {
+            max-height: unset !important;
+        }
+
+        .amap-indoormap-floorbar-control.is-mobile .floor-list-box {
+            height: unset !important;
+        }
     </style>
 </head>
 <body>
 <div id="container"></div>
+
+<div>
+    <button data-value="4">4楼</button>
+    <button data-value="3">3楼</button>
+    <button data-value="2">2楼</button>
+    <button data-value="1">1楼</button>
+    <button data-value="-1">负1楼</button>
+    <button data-value="-2">地下停车场</button>
+</div>
 
 <script>
   window._AMapSecurityConfig = {
@@ -42,6 +63,9 @@
         showIndoorMap: true,
         center: [108.962636, 34.216242],
       });
+      window.aaa = map;
+      /* 隐藏楼层控件*/
+      // map.indoorMap.hideFloorBar(true);
 
       const path2 = [
         [108.961888, 34.215844],
