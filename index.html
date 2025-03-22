@@ -55,7 +55,13 @@
 
 
       const run = async () => {
-        const coordinate = await getCurrentLocation();
+
+
+        const coordinate = await getCurrentLocation({
+          map,
+          AMap,
+        });
+        console.log(coordinate);
         map.setCenter(coordinate);
         renderLine({
           map,

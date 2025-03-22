@@ -206,13 +206,31 @@ const renderLine = (options) => {
 };
 
 
-const getCurrentLocation = async () => {
+const getCurrentLocation = async (options) => {
+  const { AMap, map } = options;
+
+  // return new Promise(resolve => {
+  //   navigator.geolocation.getCurrentPosition(function (position) {
+  //     var latitude = position.coords.latitude;
+  //     var longitude = position.coords.longitude;
+  //     let coordinate = [longitude, latitude];
+  //     resolve(coordinate);
+  //   });
+  // });
   return new Promise(resolve => {
-    navigator.geolocation.getCurrentPosition(function (position) {
-      var latitude = position.coords.latitude;
-      var longitude = position.coords.longitude;
-      let coordinate = [longitude, latitude];
-      resolve(coordinate);
+    AMap.plugin('AMap.Geolocation', function () {
+      var geolocation = new AMap.Geolocation({
+        enableHighAccuracy: true,//是否使用高精度定位，默认:true
+        timeout: 10000,          //超过10秒后停止定位，默认：5s
+        zoomToAccuracy: true,   //定位成功后是否自动调整地图视野到定位点
+
+      });
+      // map.addControl(geolocation);
+      geolocation.getCurrentPosition(function (status, result) {
+        if (status == 'complete') {
+          resolve([result?.position?.lng, result?.position?.lat]);
+        }
+      });
     });
   });
 };
