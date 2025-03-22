@@ -159,6 +159,30 @@ const drawWalkingLine = (options) => {
 
 };
 
+const addMark = (options) => {
+  const { AMap, map } = options;
+  const content = '<div class="mark"><img class="aaa" src="./aaa.jpg" />绿茉莉</div>';
+  const marker = new AMap.Marker({
+    content,
+    position: [108.9626, 34.216253],
+    offset: new AMap.Pixel(-13, -30),
+  });
+
+  map.add(marker);
+
+
+};
+
+const addDw = (options) => {
+  const { AMap, map, coordinate } = options;
+  const content = '<img class="dw" src="./dw.png" />';
+  const bbb = new AMap.Marker({
+    content,
+    showShadow: true,
+    position: coordinate,
+  });
+  map.add(bbb);
+};
 
 const renderLine = (options) => {
   const { AMap, map, coordinate } = options;
@@ -172,6 +196,13 @@ const renderLine = (options) => {
   drawWalkingLine({
     AMap, map, coordinate, pathData,
   });
+  addMark({
+    AMap, map, coordinate, pathData,
+  });
+  addDw({
+    AMap, map, coordinate, pathData,
+  });
+
 };
 
 

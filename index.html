@@ -11,7 +11,11 @@
 <body>
 <div id="container"></div>
 
-<div id="refsh">刷新当前位置</div>
+<div id="button">
+    <div class="refsh">刷新当前位置</div>
+    <div class="detail">查看路线详情</div>
+
+</div>
 <script>
   window._AMapSecurityConfig = {
     securityJsCode: "8ec0a13f9efd6705e00b339fa29453b2",
@@ -48,34 +52,28 @@
           },
         }));
       });
-      document.querySelector('#refsh').addEventListener('click', async () => {
+
+
+      const run = async () => {
         const coordinate = await getCurrentLocation();
-        const bbb = new AMap.Marker({
-          map: map,
-          icon: new AMap.Icon({
-            size: new AMap.Size(30, 30),
-            image: './dw.png',
-            imageSize: new AMap.Size(30, 30),
-          }),
-          showShadow: true,
-          position: [108.962612, 34.216252],
-        });
-
-        setTimeout(() => {
-          map.add(bbb);
-        }, 100);
-
-        bbb.setPosition(coordinate);
         map.setCenter(coordinate);
         renderLine({
           map,
           AMap,
           coordinate,
         });
+      };
+
+      run();
+
+      document.querySelector('.refsh').addEventListener('click', async () => {
+        run();
       });
+
 
       let att = [];
       map.on('click', (e) => {
+
         // 拾取坐标
         let coordinate = [e.lnglat.lng, e.lnglat.lat];
         att.push(coordinate);
@@ -87,6 +85,8 @@
           AMap,
           coordinate,
         });
+
+
       });
 
 
@@ -94,6 +94,12 @@
     .catch((e) => {
       console.error(e); //加载错误提示
     });
+
+
+  document.querySelector('.detail').addEventListener('click', () => {
+    window.location.href = './detail.html';
+
+  });
 
 
 </script>

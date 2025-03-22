@@ -24,17 +24,43 @@ body,
   background: #1890ff;
   color: #fff !important;
 }
-#refsh {
+#button {
   position: fixed;
-  width: 100px;
-  height: 30px;
-  border-radius: 6px;
-  text-align: center;
-  line-height: 30px;
-  background: #ffffff;
-  bottom: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   left: 50%;
-  margin-left: -50%;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  transform: translateX(-50%);
+  bottom: 50px;
+  gap: 1px;
+  border-radius: 6px;
+  overflow: hidden;
+  width: 17rem;
+}
+#button > div {
+  flex: 1;
+  text-align: center;
+  padding: 0.5rem 0.75rem;
+  color: #ffffff;
+  background: #1890ff;
+}
+#button .refsh {
+  text-align: center;
+}
+.mark {
+  font-size: 0.9rem;
+  display: flex;
+  text-align: center;
+  color: #1b420e;
+  flex-direction: column;
+}
+.mark .aaa {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: 1px #1b420e solid;
+}
+.dw {
+  width: 2.5rem;
 }
 /*# sourceMappingURL=index.css.map */
