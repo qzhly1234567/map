@@ -1,8 +1,9 @@
 const addLine = (options) => {
 
-  const { AMap, map, path, highlight } = options;
+  const { AMap, map, path, highlight, type } = options;
   const polyline = new AMap.Polyline({
     path: path,
+    type,
     // strokeColor: "#007FF871",
     strokeColor: highlight ? "#007FF8" : "rgba(0,127,248,0.42)",
     strokeOpacity: 1,
@@ -15,11 +16,25 @@ const addLine = (options) => {
   map.add(polyline);
 
   polyline.on('click', (e) => {
-    console.log(e);
+    map.getAllOverlays().forEach(overlay => {
+      if (['toDoor', 'toRestaurant'].includes(overlay?.De?.type)) {
+        overlay.setOptions({
+          strokeColor: "rgba(0,127,248,0.42)",
+          dirColor: "#007FF8",
+        });
+      }
+    });
     polyline.setOptions({
       strokeColor: "#007FF8",
-
+      dirColor: "#001d42",
     });
+
+    if (type === 'toDoor') {
+      map.indoorMap.showFloor(1);
+    } else if (type === 'toRestaurant') {
+      map.indoorMap.showFloor(4);
+
+    }
   });
 
 };
@@ -190,8 +205,9 @@ const renderLine = (options) => {
   let pathData = getNearestDoorPath(coordinate);
   console.log(pathData.doorPath);
   delAllLines(map);
-  addLine({ AMap, map, path: pathData.doorPath });
-  addLine({ AMap, map, path: pathData.toRestaurantPath });
+  map.indoorMap.showFloor(1);
+  addLine({ AMap, map, path: pathData.doorPath, highlight: true, type: 'toDoor' });
+  addLine({ AMap, map, path: pathData.toRestaurantPath, type: 'toRestaurant' });
   addText({ map, coordinate: pathData.elevator, text: '乘坐电梯至4F' });
   drawWalkingLine({
     AMap, map, coordinate, pathData,

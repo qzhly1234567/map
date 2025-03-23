@@ -45,57 +45,18 @@
         showIndoorMap: true,
         center: [108.962636, 34.216242],
       });
-      window.aaa = map;
-
-
-      AMap.plugin(['AMap.ControlBar'], function () {
-        map.addControl(new AMap.ControlBar({
-          position: {
-            top: '10px',
-            right: '10px',
-          },
-        }));
-      });
-
-
-      const run = async () => {
-
-
-        const coordinate = await getCurrentLocation({
-          map,
-          AMap,
-        });
-        console.log(coordinate);
-        map.setCenter(coordinate);
-        renderLine({
-          map,
-          AMap,
-          coordinate,
-        });
-      };
-
-      run();
-
-      document.querySelector('.refsh').addEventListener('click', async () => {
-        run();
-      });
 
 
       let att = [];
       map.on('click', (e) => {
 
-        return;
         // 拾取坐标
         let coordinate = [e.lnglat.lng, e.lnglat.lat];
         att.push(coordinate);
         console.log(att);
         console.log(coordinate);
-        // 渲染
-        renderLine({
-          map,
-          AMap,
-          coordinate,
-        });
+        addLine({ AMap, map, path: att });
+
 
 
       });
@@ -105,12 +66,6 @@
     .catch((e) => {
       console.error(e); //加载错误提示
     });
-
-
-  document.querySelector('.detail').addEventListener('click', () => {
-    window.location.href = './detail.html';
-
-  });
 
 
 </script>

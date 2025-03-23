@@ -63,4 +63,7 @@ body,
 .dw {
   width: 2.5rem;
 }
+.amap-indoormap-floorbar-control {
+  display: none !important;
+}
 /*# sourceMappingURL=index.css.map */
