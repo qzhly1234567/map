@@ -7,10 +7,9 @@ const addLine = (options) => {
     // strokeColor: "#007FF871",
     strokeColor: highlight ? "#007FF8" : "rgba(0,127,248,0.42)",
     strokeOpacity: 1,
-    strokeWeight: 6,
+    strokeWeight: 8,
     showDir: true, // 显示方向箭头
-    dirColor: highlight ? "#001d42" : "#007FF8",
-    strokeDasharray: [10, 5],
+    dirColor: highlight ? "rgba(255,255,255,0.84)" : "#007FF8",
   });
 
   map.add(polyline);
@@ -26,7 +25,7 @@ const addLine = (options) => {
     });
     polyline.setOptions({
       strokeColor: "#007FF8",
-      dirColor: "#001d42",
+      dirColor: "rgba(255,255,255,0.84)",
     });
 
     if (type === 'toDoor') {
