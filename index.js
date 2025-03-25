@@ -202,7 +202,13 @@ const renderLine = (options) => {
   const { AMap, map, coordinate } = options;
   // 获取最近的进门路线
   let pathData = getNearestDoorPath(coordinate);
-  console.log(pathData.doorPath);
+  console.log(pathData);
+
+  document.querySelector('.detail').onclick = () => {
+    window.location.href = './detail.html?id=' + pathData.id;
+  };
+
+
   delAllLines(map);
   map.indoorMap.showFloor(1);
   addLine({ AMap, map, path: pathData.doorPath, highlight: true, type: 'toDoor' });

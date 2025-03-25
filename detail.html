@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>路线详情</title>
     <style>
         * {
             margin: 0;
@@ -22,11 +22,76 @@
     </style>
 </head>
 <body>
-
-<img src="./img/1.jpeg" alt="">
-<img src="./img/2.jpeg" alt="">
-<img src="./img/3.jpeg" alt="">
-<img src="./img/4.jpeg" alt="">
-
 </body>
 </html>
+<script>
+
+  function parseUrlParams() {
+    const urlObj = new URL(location.href);
+
+    const params = {};
+    urlObj.searchParams.forEach((value, key) => {
+      params[key] = value;
+    });
+
+    return params;
+  }
+
+
+  let data = [
+    [
+      { name: "1-1.jpeg", link: "https://pic1.imgdb.cn/item/67e206620ba3d5a1d7e2caf3.jpg" },
+      { name: "1-2.jpeg", link: "https://pic1.imgdb.cn/item/67e206620ba3d5a1d7e2caed.jpg" },
+      { name: "1-3.jpeg", link: "https://pic1.imgdb.cn/item/67e206620ba3d5a1d7e2caee.jpg" },
+      { name: "1-4.jpeg", link: "https://pic1.imgdb.cn/item/67e206620ba3d5a1d7e2caf1.jpg" },
+      { name: "1-5.jpeg", link: "https://pic1.imgdb.cn/item/67e206620ba3d5a1d7e2caeb.jpg" },
+      { name: "1-6.jpeg", link: "https://pic1.imgdb.cn/item/67e206620ba3d5a1d7e2caec.jpg" },
+    ],
+    [
+      { name: "2-1.jpeg", link: "https://pic1.imgdb.cn/item/67e206620ba3d5a1d7e2caef.jpg" },
+      { name: "2-2.jpeg", link: "https://pic1.imgdb.cn/item/67e206620ba3d5a1d7e2caf0.jpg" },
+      { name: "2-3.jpeg", link: "https://pic1.imgdb.cn/item/67e206620ba3d5a1d7e2caea.jpg" },
+      { name: "2-4.jpeg", link: "https://pic1.imgdb.cn/item/67e206620ba3d5a1d7e2caf2.jpg" },
+      { name: "2-5.jpeg", link: "https://pic1.imgdb.cn/item/67e206630ba3d5a1d7e2caf4.jpg" },
+      { name: "2-6.jpeg", link: "https://pic1.imgdb.cn/item/67e206630ba3d5a1d7e2caf5.jpg" },
+      { name: "2-7.jpeg", link: "https://pic1.imgdb.cn/item/67e206630ba3d5a1d7e2caf7.jpg" },
+    ],
+    [
+      { name: "3-1.jpeg", link: "https://pic1.imgdb.cn/item/67e206630ba3d5a1d7e2caf6.jpg" },
+      { name: "3-2.jpeg", link: "https://pic1.imgdb.cn/item/67e206640ba3d5a1d7e2cafc.jpg" },
+      { name: "3-3.jpeg", link: "https://pic1.imgdb.cn/item/67e206640ba3d5a1d7e2caf9.jpg" },
+      { name: "3-4.jpeg", link: "https://pic1.imgdb.cn/item/67e206640ba3d5a1d7e2caf8.jpg" },
+      { name: "3-5.jpeg", link: "https://pic1.imgdb.cn/item/67e206640ba3d5a1d7e2cafb.jpg" },
+      { name: "3-6.jpeg", link: "https://pic1.imgdb.cn/item/67e206640ba3d5a1d7e2cafa.jpg" },
+      { name: "3-7.jpeg", link: "https://pic1.imgdb.cn/item/67e206640ba3d5a1d7e2caff.jpg" },
+      { name: "3-8.jpeg", link: "https://pic1.imgdb.cn/item/67e206640ba3d5a1d7e2cafe.jpg" },
+      { name: "3-9.jpeg", link: "https://pic1.imgdb.cn/item/67e206640ba3d5a1d7e2cafd.jpg" },
+    ],
+    [],
+    [
+      { name: "5-1.jpeg", link: "https://pic1.imgdb.cn/item/67e206640ba3d5a1d7e2cb01.jpg" },
+      { name: "5-2.jpeg", link: "https://pic1.imgdb.cn/item/67e206640ba3d5a1d7e2cb00.jpg" },
+      { name: "5-3.jpeg", link: "https://pic1.imgdb.cn/item/67e206640ba3d5a1d7e2cb02.jpg" },
+      { name: "5-4.jpeg", link: "https://pic1.imgdb.cn/item/67e206640ba3d5a1d7e2cb03.jpg" },
+      { name: "5-5.jpeg", link: "https://pic1.imgdb.cn/item/67e206640ba3d5a1d7e2cb04.jpg" },
+      { name: "5-6.jpeg", link: "https://pic1.imgdb.cn/item/67e206640ba3d5a1d7e2cb05.jpg" },
+      { name: "5-7.jpeg", link: "https://pic1.imgdb.cn/item/67e206640ba3d5a1d7e2cb06.jpg" },
+      { name: "5-8.jpeg", link: "https://pic1.imgdb.cn/item/67e206650ba3d5a1d7e2cb07.jpg" },
+    ],
+  ];
+
+
+  const params = parseUrlParams();
+
+  const eleP = document.createElement('Section');
+
+
+  data[params.id - 1].forEach((item) => {
+    const eleC = document.createElement('img');
+    eleC.src = item.link;
+    eleP.appendChild(eleC);
+  });
+
+  document.body.appendChild(eleP);
+
+</script>
