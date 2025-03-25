@@ -107,13 +107,13 @@ const doorPaths = [
     toRestaurantPath: toRestaurant3path,
     elevator: toRestaurant3path[0],
   },
-  {
-    id: '4',
-    doorPath: door4path,
-    doorLngLat: door4path[0],
-    toRestaurantPath: toRestaurant3path,
-    elevator: toRestaurant3path[0],
-  },
+  // {
+  //   id: '4',
+  //   doorPath: door4path,
+  //   doorLngLat: door4path[0],
+  //   toRestaurantPath: toRestaurant3path,
+  //   elevator: toRestaurant3path[0],
+  // },
   {
     id: '5',
     doorPath: door5path,
